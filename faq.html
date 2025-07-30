@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - SHOPINDIA | Frequently Asked Questions</title>
+    <meta name="description" content="Find answers to frequently asked questions about SHOPINDIA. Get help with orders, shipping, returns, payments, and more.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 100px;
+        }
+        
+        .faq-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .faq-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .faq-search {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .faq-search input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .faq-search input:focus {
+            border-color: var(--primary-color);
+        }
+        
+        .faq-search i {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        
+        .faq-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .faq-category {
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .faq-category:hover,
+        .faq-category.active {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+        
+        .faq-category i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .faq-section {
+            margin-bottom: 2rem;
+        }
+        
+        .faq-section h2 {
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .faq-item {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            transition: background 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: var(--light-gray);
+        }
+        
+        .faq-question h3 {
+            color: var(--text-dark);
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .faq-toggle {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+            opacity: 1;
+        }
+        
+        .faq-answer p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .faq-answer ul {
+            color: var(--text-light);
+            padding-left: 1.5rem;
+        }
+        
+        .faq-answer li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-support {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .contact-support h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .contact-support p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .contact-method {
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .contact-method:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .contact-method i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-method h4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-method p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h1><i class="fas fa-shopping-bag"></i> <a href="index.html" style="text-decoration: none; color: inherit;">SHOPINDIA</a></h1>
+                    <p class="tagline">Discover Incredible India</p>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="faq.html" class="active">FAQ</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search for authentic Indian products...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="user-actions">
+                        <a href="#account"><i class="fas fa-user"></i></a>
+                        <a href="#wishlist"><i class="fas fa-heart"></i> <span class="count">0</span></a>
+                        <a href="#cart"><i class="fas fa-shopping-cart"></i> <span class="count">0</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- FAQ Content -->
+    <main class="faq-container">
+        <div class="container">
+            <!-- FAQ Header -->
+            <div class="faq-header">
+                <h1>Frequently Asked Questions</h1>
+                <p>Find quick answers to common questions about shopping at SHOPINDIA. Can't find what you're looking for? Our customer support team is here to help!</p>
+            </div>
+
+            <!-- FAQ Search -->
+            <div class="faq-search">
+                <input type="text" placeholder="Search for answers..." id="faqSearch">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <!-- FAQ Categories -->
+            <div class="faq-categories">
+                <div class="faq-category active" data-category="all">
+                    <i class="fas fa-list"></i>
+                    <span>All Topics</span>
+                </div>
+                <div class="faq-category" data-category="orders">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Orders</span>
+                </div>
+                <div class="faq-category" data-category="shipping">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>Shipping</span>
+                </div>
+                <div class="faq-category" data-category="returns">
+                    <i class="fas fa-undo"></i>
+                    <span>Returns</span>
+                </div>
+                <div class="faq-category" data-category="payments">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Payments</span>
+                </div>
+                <div class="faq-category" data-category="account">
+                    <i class="fas fa-user"></i>
+                    <span>Account</span>
+                </div>
+            </div>
+
+            <!-- Orders FAQ Section -->
+            <div class="faq-section" data-category="orders">
+                <h2><i class="fas fa-shopping-cart"></i> Orders & Shopping</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I place an order on SHOPINDIA?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Placing an order is simple:</p>
+                        <ul>
+                            <li>Browse our categories or use the search bar to find products</li>
+                            <li>Click on a product to view details and select options</li>
+                            <li>Click "Add to Cart" and continue shopping or proceed to checkout</li>
+                            <li>Review your cart, apply any discount codes, and click "Checkout"</li>
+                            <li>Enter your shipping and payment information</li>
+                            <li>Review and confirm your order</li>
+                        </ul>
+                        <p>You'll receive an order confirmation email with your order details and tracking information.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I modify or cancel my order after placing it?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can modify or cancel your order within 2 hours of placing it, provided it hasn't been processed for shipping. To make changes:</p>
+                        <ul>
+                            <li>Log into your account and go to "My Orders"</li>
+                            <li>Find your recent order and click "Modify" or "Cancel"</li>
+                            <li>For urgent changes, call our customer service at +91-800-SHOPINDIA</li>
+                        </ul>
+                        <p>Once an order is shipped, it cannot be modified, but you can return items as per our return policy.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you guarantee the authenticity of all products?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! SHOPINDIA guarantees 100% authenticity of all products. We work directly with verified artisans, manufacturers, and authorized dealers. Every product comes with:</p>
+                        <ul>
+                            <li>Certificate of authenticity (where applicable)</li>
+                            <li>Detailed product information and origin details</li>
+                            <li>Quality assurance guarantee</li>
+                            <li>Full refund if authenticity is questioned</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shipping FAQ Section -->
+            <div class="faq-section" data-category="shipping">
+                <h2><i class="fas fa-shipping-fast"></i> Shipping & Delivery</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What are your shipping charges and delivery times?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer flexible shipping options across India:</p>
+                        <ul>
+                            <li><strong>Free Standard Shipping:</strong> 5-7 business days (orders above ₹999)</li>
+                            <li><strong>Express Shipping:</strong> 2-3 business days (₹99 extra)</li>
+                            <li><strong>Same-Day Delivery:</strong> Available in Delhi, Mumbai, Bangalore (₹199 extra)</li>
+                            <li><strong>International Shipping:</strong> 7-14 business days (charges vary by destination)</li>
+                        </ul>
+                        <p>Remote areas may require 1-2 additional days. Shipping is calculated at checkout based on your location.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How can I track my order?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Tracking your order is easy:</p>
+                        <ul>
+                            <li>Check your email for the shipping confirmation with tracking number</li>
+                            <li>Log into your SHOPINDIA account and visit "My Orders"</li>
+                            <li>Use our order tracking page with your order number</li>
+                            <li>SMS updates will be sent to your registered mobile number</li>
+                        </ul>
+                        <p>You can also call our customer service for real-time updates on your order status.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you ship internationally?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we ship to over 50 countries worldwide! International shipping includes:</p>
+                        <ul>
+                            <li>Secure packaging for international transit</li>
+                            <li>Customs declaration and documentation</li>
+                            <li>Insurance coverage for high-value items</li>
+                            <li>Tracking available throughout the journey</li>
+                        </ul>
+                        <p>Note: International customers are responsible for any customs duties, taxes, or import fees imposed by their country.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Returns FAQ Section -->
+            <div class="faq-section" data-category="returns">
+                <h2><i class="fas fa-undo"></i> Returns & Refunds</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What is your return policy?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>SHOPINDIA offers a hassle-free 15-day return policy:</p>
+                        <ul>
+                            <li>Items must be unused and in original packaging</li>
+                            <li>Tags and labels must be intact</li>
+                            <li>Return request must be initiated within 15 days of delivery</li>
+                            <li>Some items like food products and personalized items are non-returnable</li>
+                        </ul>
+                        <p>To initiate a return, log into your account, go to "My Orders," and click "Return Item" next to the product you wish to return.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How long does it take to process refunds?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Refund processing times vary by payment method:</p>
+                        <ul>
+                            <li><strong>Credit/Debit Cards:</strong> 5-7 business days</li>
+                            <li><strong>UPI/Net Banking:</strong> 3-5 business days</li>
+                            <li><strong>Digital Wallets:</strong> 2-3 business days</li>
+                            <li><strong>Cash on Delivery:</strong> Bank transfer within 7-10 business days</li>
+                        </ul>
+                        <p>You'll receive email confirmation once the refund is processed. The actual credit to your account depends on your bank's processing time.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I exchange an item instead of returning it?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We offer exchanges for:</p>
+                        <ul>
+                            <li>Different sizes (clothing, jewelry)</li>
+                            <li>Different colors (where available)</li>
+                            <li>Damaged or defective items</li>
+                        </ul>
+                        <p>Exchange requests can be made through your account or by contacting customer service. If the new item costs more, you'll pay the difference. If it costs less, we'll refund the difference.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payments FAQ Section -->
+            <div class="faq-section" data-category="payments">
+                <h2><i class="fas fa-credit-card"></i> Payments & Pricing</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What payment methods do you accept?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept all major payment methods for your convenience:</p>
+                        <ul>
+                            <li><strong>Credit Cards:</strong> Visa, MasterCard, American Express, RuPay</li>
+                            <li><strong>Debit Cards:</strong> All major Indian bank debit cards</li>
+                            <li><strong>Digital Payments:</strong> UPI, Paytm, PhonePe, Google Pay</li>
+                            <li><strong>Net Banking:</strong> All major Indian banks</li>
+                            <li><strong>Cash on Delivery:</strong> Available for orders under ₹10,000</li>
+                            <li><strong>EMI Options:</strong> 3, 6, 9, 12 months (on select cards)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is my payment information secure?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! Your payment security is our top priority:</p>
+                        <ul>
+                            <li>256-bit SSL encryption for all transactions</li>
+                            <li>PCI DSS compliant payment processing</li>
+                            <li>We never store your complete card details</li>
+                            <li>Two-factor authentication for added security</li>
+                            <li>Fraud detection and prevention systems</li>
+                        </ul>
+                        <p>All payments are processed through secure payment gateways like Razorpay and Stripe.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you offer any discounts or promotional codes?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We regularly offer various discounts and promotions:</p>
+                        <ul>
+                            <li><strong>First-time buyers:</strong> 10% off with code WELCOME10</li>
+                            <li><strong>Festival sales:</strong> Special discounts during Indian festivals</li>
+                            <li><strong>Bulk orders:</strong> Volume discounts for large purchases</li>
+                            <li><strong>Newsletter subscribers:</strong> Exclusive early access to sales</li>
+                            <li><strong>Loyalty program:</strong> Earn points with every purchase</li>
+                        </ul>
+                        <p>Follow us on social media and subscribe to our newsletter for the latest offers!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account FAQ Section -->
+            <div class="faq-section" data-category="account">
+                <h2><i class="fas fa-user"></i> Account & Profile</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I create an account?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Creating an account is quick and easy:</p>
+                        <ul>
+                            <li>Click on the "Account" icon in the top right corner</li>
+                            <li>Select "Sign Up" and enter your details</li>
+                            <li>Verify your email address through the confirmation link</li>
+                            <li>Complete your profile with shipping addresses</li>
+                        </ul>
+                        <p>You can also sign up using your Google or Facebook account for faster registration.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>I forgot my password. How do I reset it?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To reset your password:</p>
+                        <ul>
+                            <li>Go to the login page and click "Forgot Password"</li>
+                            <li>Enter your registered email address</li>
+                            <li>Check your email for password reset instructions</li>
+                            <li>Click the reset link and create a new password</li>
+                        </ul>
+                        <p>If you don't receive the email within 10 minutes, check your spam folder or contact customer support.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How do I update my profile and address information?</h3>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To update your information:</p>
+                        <ul>
+                            <li>Log into your account and go to "My Profile"</li>
+                            <li>Edit your personal information, phone number, or email</li>
+                            <li>Go to "Address Book" to add, edit, or delete addresses</li>
+                            <li>Save your changes and verify with OTP if required</li>
+                        </ul>
+                        <p>Keep your information updated to ensure smooth order processing and delivery.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Support Section -->
+            <div class="contact-support">
+                <h3>Still Need Help?</h3>
+                <p>Our customer support team is here to assist you with any questions or concerns.</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <i class="fas fa-phone"></i>
+                        <h4>Call Us</h4>
+                        <p>+91-800-SHOPINDIA<br>Mon-Sat: 9AM-8PM IST</p>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email Us</h4>
+                        <p>support@shopindia.com<br>Response within 24 hours</p>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-comments"></i>
+                        <h4>Live Chat</h4>
+                        <p>Available on website<br>9AM-8PM IST</p>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <i class="fab fa-whatsapp"></i>
+                        <h4>WhatsApp</h4>
+                        <p>+91-9876543210<br>Quick support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SHOPINDIA</h3>
+                    <p>Your trusted partner for authentic Indian products. Connecting you with India's rich heritage and modern innovation.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#bestsellers">Best Sellers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="faq.html">Help Center</a></li>
+                        <li><a href="#shipping">Shipping Info</a></li>
+                        <li><a href="#returns">Returns & Refunds</a></li>
+                        <li><a href="#size-guide">Size Guide</a></li>
+                        <li><a href="#track-order">Track Your Order</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +91-800-SHOPINDIA</p>
+                        <p><i class="fas fa-envelope"></i> support@shopindia.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> New Delhi, India</p>
+                        <p><i class="fas fa-clock"></i> Mon-Sat: 9AM-8PM IST</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 SHOPINDIA. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+                    <div class="payment-methods">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="Mastercard">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/200px-American_Express_logo_%282018%29.svg.png" alt="American Express">
+                        <span>UPI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // FAQ specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ toggle functionality
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', function() {
+                    const faqItem = this.parentElement;
+                    const isActive = faqItem.classList.contains('active');
+                    
+                    // Close all other FAQ items
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Toggle current item
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                    }
+                });
+            });
+            
+            // Category filtering
+            document.querySelectorAll('.faq-category').forEach(category => {
+                category.addEventListener('click', function() {
+                    const selectedCategory = this.dataset.category;
+                    
+                    // Update active category
+                    document.querySelectorAll('.faq-category').forEach(cat => {
+                        cat.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Show/hide sections
+                    document.querySelectorAll('.faq-section').forEach(section => {
+                        if (selectedCategory === 'all' || section.dataset.category === selectedCategory) {
+                            section.style.display = 'block';
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // FAQ search functionality
+            const searchInput = document.getElementById('faqSearch');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    const question = item.querySelector('.faq-question h3').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        item.parentElement.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Hide empty sections
+                document.querySelectorAll('.faq-section').forEach(section => {
+                    const visibleItems = section.querySelectorAll('.faq-item[style*="block"]');
+                    if (visibleItems.length === 0 && searchTerm !== '') {
+                        section.style.display = 'none';
+                    } else if (searchTerm === '') {
+                        section.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
